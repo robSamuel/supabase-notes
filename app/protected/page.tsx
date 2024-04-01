@@ -8,11 +8,9 @@ import { redirect } from "next/navigation";
 export default async function ProtectedPage() {
   const supabase = createClient();
 
-  const data = await supabase.auth.getUser();
-  console.log('supabase.auth', supabase.auth)
-  console.log('data.user', data)
+  const { data: { user } } = await supabase.auth.getUser();
 
-  if (!data?.data?.user) {
+  if (!user) {
     return redirect("/login");
   }
 
