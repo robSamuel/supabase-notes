@@ -1,7 +1,6 @@
 'use server';
 
 import { NextApiClient } from "@/utils/axiosConfig";
-import process from 'process';
 
 const login = async (formData: FormData) => {
   const axiosClient = NextApiClient;
