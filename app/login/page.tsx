@@ -3,6 +3,7 @@ import { headers } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { SubmitButton } from "./submit-button";
+import login from "@/actions/login/action-login";
 
 export default function Login({
   searchParams,
@@ -11,19 +12,15 @@ export default function Login({
 }) {
   const signIn = async (formData: FormData) => {
     "use server";
-
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
     const supabase = createClient();
+    const response = await login(formData);
+    const { session = {} } = response || {};
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
+
+    const data = await supabase.auth.setSession({
+      access_token: session.access_token,
+      refresh_token: session.refresh_token
     });
-
-    if (error) {
-      return redirect("/login?message=Could not authenticate user");
-    }
 
     return redirect("/protected");
   };
