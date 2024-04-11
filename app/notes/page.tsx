@@ -1,20 +1,8 @@
 'use client'
-import { useEffect, useState, useCallback } from 'react';
-import { getNotes } from '@/actions/notes/action-notes';
+import NotesList from "@/components/Notes/NotesList";
 
-export default function Notes() {
-  const [notes, setNotes] = useState([]);
+const Notes = () => (
+  <NotesList />
+);
 
-  const retrieveNotes = useCallback(async() => {
-    const { data } = await getNotes();
-
-    setNotes(data);
-  }, []);
-
-  useEffect(() => {
-    retrieveNotes()
-  }, [retrieveNotes]);
-  
-
-  return <pre>{JSON.stringify(notes, null, 2)}</pre>
-}
+export default Notes;

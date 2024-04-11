@@ -13,6 +13,8 @@ module.exports = {
           background: "hsl(var(--btn-background))",
           "background-hover": "hsl(var(--btn-background-hover))",
         },
+        "background-dark": "#213c4a",
+        blue: "#0070f3",
       },
     },
   },
