@@ -1,19 +1,36 @@
+import { FaEdit, FaTrashAlt  } from "react-icons/fa";
 import Button from '../Button';
 import { TableProps } from '@/types/notes';
+
+const cellClassName = 'border-gray-700 border';
 
 const Table = ({ notes, onEdit, onDelete }: TableProps) => {
   const renderRows = () => {
     return notes.map(note => (
       <tr key={note.id}>
-        <td className="w-[25px] text-left">{note.id}</td>
-        <td className="w-[250px] text-left">{note.text}</td>
-        {/* <td>{note.createdBy}</td> */}
-        <td className="w-[120px] text-center">{note.createdAt}</td>
-        {/* <td>{note.updatedBy}</td> */}
-        <td className="w-[120px] text-center">{note.updatedAt}</td>
-        <td className="flex justify-end">
-          <Button label="Edit" onClick={() => onEdit(note.id)} />
-          <Button label="Delete" onClick={() => onDelete(note.id)} />
+        <td className={`w-[25px] text-left ${cellClassName}`}>
+          {note.id}
+        </td>
+        <td className={`w-auto text-left ${cellClassName}`}>
+          {note.text}
+        </td>
+        <td className={`w-[120px] text-center ${cellClassName}`}>
+          {note.createdAt}
+        </td>
+        <td className={`w-[120px] text-center ${cellClassName}`}>
+          {note.updatedAt}
+        </td>
+        <td className={`w-[150px] flex justify-evenly ${cellClassName}`}>
+          <Button
+            onClick={() => onEdit(note.id)}
+            icon={<FaEdit className='ml-1' />}
+            intent="secondary"
+          />
+          <Button
+            onClick={() => onDelete(note.id)}
+            icon={<FaTrashAlt />}
+            intent="danger"
+          />
         </td>
       </tr>
     ));
@@ -22,13 +39,11 @@ const Table = ({ notes, onEdit, onDelete }: TableProps) => {
     <table>
       <thead>
         <tr>
-          <th className="w-[25px] text-left">Id</th>
-          <th className="w-[250px] text-left">Text</th>
-          {/* <th className="w-[25px] text-left">Created By</th> */}
-          <th className="w-[120px] text-center">Created At</th>
-          {/* <th className="w-[25px]">Updated By</th> */}
-          <th className="w-[120px] text-center">Updated At</th>
-          <th className="w-[25px] text-right">Actions</th>
+          <th className={`w-[25px] text-left ${cellClassName}`}>Id</th>
+          <th className={`w-auto text-left ${cellClassName}`}>Text</th>
+          <th className={`w-[120px] text-center ${cellClassName}`}>Created At</th>
+          <th className={`w-[120px] text-center ${cellClassName}`}>Updated At</th>
+          <th className={`w-[150px] text-center ${cellClassName}`}>Actions</th>
         </tr>
       </thead>
       <tbody>

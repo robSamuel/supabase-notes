@@ -22,7 +22,7 @@ export default function Login({
       refresh_token: session.refresh_token
     });
 
-    return redirect("/protected");
+    return redirect("/notes");
   };
 
   const signUp = async (formData: FormData) => {
