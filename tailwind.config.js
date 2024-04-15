@@ -14,7 +14,7 @@ module.exports = {
           "background-hover": "hsl(var(--btn-background-hover))",
         },
         "background-dark": "#213c4a",
-        blue: "#0070f3",
+        // blue: "#0070f3",
       },
     },
   },

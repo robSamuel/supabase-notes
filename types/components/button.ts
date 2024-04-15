@@ -1,8 +1,11 @@
+import { ReactNode } from 'react';
+
 export type ButtonProps = {
-  label: string;
+  label?: string;
   onClick: () => void;
   disabled?: boolean;
-  intent?: 'primary' | 'secondary' | 'danger';
+  intent?: 'primary' | 'secondary' | 'danger' | 'contained';
   customClass?: string;
+  icon?: ReactNode
 };
 
