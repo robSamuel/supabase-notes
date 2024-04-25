@@ -1,22 +1,11 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextRequest } from "next/server";
 import { createClient } from "@/utils/supabase/server";
 import { NextResponse } from "next/server";
 
-async function streamToString(stream: any) {
-  const chunks = [];
-  
-  for await (const chunk of stream) {
-    chunks.push(chunk);
-  }
-  
-  return Buffer.concat(chunks).toString('utf8');
-}
-
-export async function POST(req: NextApiRequest) {
+export async function POST(req: NextRequest) {
   const supabase = createClient();
 
-  const dataT = await streamToString(req.body);
-  const { email, password } = JSON.parse(dataT);
+  const { email, password } = await req.json();
 
   const { error, data: { user, session }, } = await supabase.auth.signInWithPassword({
     email: email,
